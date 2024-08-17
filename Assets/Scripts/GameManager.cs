@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private Image gameImage;
 
+	[SerializeField]
+	private Toggle playToggle;
+
 	[Header("GameOfLife")]
 	[SerializeField]
 	private Color deadColor;
@@ -50,7 +53,11 @@ public class GameManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-
+		if (!playToggle.isOn)
+		{
+			return;
+		}
+		Debug.Log("Play!");
 	}
 
 	public void SetColumnsNumber(int newNumber)
