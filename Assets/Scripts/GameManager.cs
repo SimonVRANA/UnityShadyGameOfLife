@@ -41,6 +41,7 @@ public class GameManager : MonoBehaviour
 		columnsNumber = (columnsNumber / 16) * 16;
 
 		Texture2D newTexture = new(columnsNumber, columnsNumber * 9 / 16);
+		newTexture.filterMode = FilterMode.Point;
 		Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
 		gameImage.sprite = newSprite;
 		Clear();
@@ -48,10 +49,23 @@ public class GameManager : MonoBehaviour
 	public void Random()
 	{
 		Clear();
+
+
+		System.Random random = new();
+
+		for (int widthIndex = 0; widthIndex < gameImage.sprite.texture.width; widthIndex++)
+		{
+			for (int heightIndex = 0; heightIndex < gameImage.sprite.texture.height; heightIndex++)
+			{
+				gameImage.sprite.texture.SetPixel(widthIndex, heightIndex, random.NextDouble() < 0.5 ? deadColor : aliveColor);
+			}
+		}
+		gameImage.sprite.texture.Apply();
 	}
 
 	public void Clear()
 	{
+		gameImage.color = Color.white;
 		clearShader.SetColor("_Color", deadColor);
 		ApplyMaterialToGameImage(clearShader);
 	}
