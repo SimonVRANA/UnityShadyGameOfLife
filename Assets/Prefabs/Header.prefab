@@ -138,7 +138,19 @@ MonoBehaviour:
   m_CharacterLimit: 4
   m_OnEndEdit:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6479409599785229525}
+        m_TargetAssemblyTypeName: ColumnsInputManager, Assembly-CSharp
+        m_MethodName: OnInputFieldValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnSubmit:
     m_PersistentCalls:
       m_Calls: []
@@ -805,6 +817,7 @@ GameObject:
   - component: {fileID: 5783319958084352581}
   - component: {fileID: 358319410693820646}
   - component: {fileID: 4998817952214146509}
+  - component: {fileID: 6479409599785229525}
   m_Layer: 5
   m_Name: Comumns
   m_TagString: Untagged
@@ -873,6 +886,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &6479409599785229525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2286403744757264976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f90f95e49d4d414eb925d139b76a83e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputfield: {fileID: 6108219489926030919}
+  gamemanager: {fileID: 0}
 --- !u!1 &2478988809015805629
 GameObject:
   m_ObjectHideFlags: 0

@@ -966,6 +966,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -44.8313
       objectReference: {fileID: 0}
+    - target: {fileID: 6479409599785229525, guid: 6447ed6da515a2c4195ebb21e717620b, type: 3}
+      propertyPath: gamemanager
+      value: 
+      objectReference: {fileID: 564842421}
     - target: {fileID: 7309595586378018979, guid: 6447ed6da515a2c4195ebb21e717620b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1

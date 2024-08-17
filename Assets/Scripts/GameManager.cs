@@ -21,7 +21,25 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private Material clearShader;
 
+	public int MaxColumnsNumber => 1760;
+
 	private int columnsNumber = 496;
+	public int ColumnsNumber
+	{
+		get => columnsNumber;
+		set
+		{
+			columnsNumber = AdjustColumnsNumber(value);
+
+			Texture2D newTexture = new(columnsNumber, columnsNumber * 9 / 16)
+			{
+				filterMode = FilterMode.Point
+			};
+			Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
+			gameImage.sprite = newSprite;
+			Clear();
+		}
+	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -37,15 +55,16 @@ public class GameManager : MonoBehaviour
 
 	public void SetColumnsNumber(int newNumber)
 	{
-		columnsNumber = Mathf.Clamp(newNumber, 0, 1920);
-		columnsNumber = (columnsNumber / 16) * 16;
-
-		Texture2D newTexture = new(columnsNumber, columnsNumber * 9 / 16);
-		newTexture.filterMode = FilterMode.Point;
-		Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
-		gameImage.sprite = newSprite;
-		Clear();
+		ColumnsNumber = newNumber;
 	}
+
+	public int AdjustColumnsNumber(int newNumber)
+	{
+		int restult = Mathf.Clamp(newNumber, 0, MaxColumnsNumber);
+		restult = (restult / 16) * 16;
+		return restult;
+	}
+
 	public void Random()
 	{
 		Clear();
