@@ -4,7 +4,7 @@
 using TMPro;
 using UnityEngine;
 
-public class ColumnsInputManager : MonoBehaviour
+public class GameTicksInputManager : MonoBehaviour
 {
 	[SerializeField]
 	private TMP_InputField inputfield;
@@ -16,19 +16,19 @@ public class ColumnsInputManager : MonoBehaviour
 	{
 		if (string.IsNullOrEmpty(inputfield.text))
 		{
-			inputfield.text = gamemanager.ColumnsNumber.ToString();
+			inputfield.text = gamemanager.SpeedValue.ToString();
 			return;
 		}
 
 		try
 		{
 			int newInt = int.Parse(inputfield.text);
-			gamemanager.ColumnsNumber = newInt;
+			gamemanager.SpeedValue = newInt;
 		}
 		catch { }
 		finally
 		{
-			inputfield.text = gamemanager.ColumnsNumber.ToString();
+			inputfield.text = gamemanager.SpeedValue.ToString();
 		}
 	}
 }

@@ -44,9 +44,30 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
+	public int MaxSpeedValue => 1200;
+
+	private int speedValue = 2;
+	public int SpeedValue
+	{
+		get => speedValue;
+		set
+		{
+			speedValue = Mathf.Clamp(value, 0, MaxSpeedValue);
+			framesLeftUntilApplyGameLogic = speedValue;
+		}
+	}
+
+	private int framesLeftUntilApplyGameLogic;
+
+	private void Awake()
+	{
+		Application.targetFrameRate = 60;
+	}
+
 	// Start is called before the first frame update
 	void Start()
 	{
+		framesLeftUntilApplyGameLogic = speedValue;
 		SetColumnsNumber(columnsNumber);
 	}
 
@@ -55,9 +76,23 @@ public class GameManager : MonoBehaviour
 	{
 		if (!playToggle.isOn)
 		{
+			if (framesLeftUntilApplyGameLogic != speedValue)
+			{
+				framesLeftUntilApplyGameLogic = speedValue;
+			}
 			return;
 		}
-		Debug.Log("Play!");
+
+		if (framesLeftUntilApplyGameLogic <= 0)
+		{
+			framesLeftUntilApplyGameLogic = speedValue;
+			//TODO: apply the game mechanic
+			Debug.Log("Game tick !!!");
+		}
+		else
+		{
+			framesLeftUntilApplyGameLogic--;
+		}
 	}
 
 	public void SetColumnsNumber(int newNumber)
@@ -65,9 +100,9 @@ public class GameManager : MonoBehaviour
 		ColumnsNumber = newNumber;
 	}
 
-	public int AdjustColumnsNumber(int newNumber)
+	private int AdjustColumnsNumber(int newNumber)
 	{
-		int restult = Mathf.Clamp(newNumber, 0, MaxColumnsNumber);
+		int restult = Mathf.Clamp(newNumber, 16, MaxColumnsNumber);
 		restult = (restult / 16) * 16;
 		return restult;
 	}
