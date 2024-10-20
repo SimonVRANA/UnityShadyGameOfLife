@@ -1,6 +1,7 @@
 // This code has been made by Simon VRANA.
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -44,8 +45,11 @@ public class GameManager : MonoBehaviour
 			Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
 			gameImage.sprite = newSprite;
 			Clear();
+			OnColumnsNumberChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
+
+	public event EventHandler OnColumnsNumberChanged;
 
 	public int MaxSpeedValue => 1200;
 
@@ -133,7 +137,7 @@ public class GameManager : MonoBehaviour
 		ApplyMaterialToGameImage(clearShader);
 	}
 
-	private void ApplyGameMechanic()
+	public void ApplyGameMechanic()
 	{
 		gameOfLifeShader.SetColor("_DeadColor", deadColor);
 		gameOfLifeShader.SetColor("_AliveColor", aliveColor);

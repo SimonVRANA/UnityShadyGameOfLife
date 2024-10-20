@@ -42,6 +42,10 @@ MonoBehaviour:
     m_Localized: ' game ticks.'
     m_Metadata:
       m_Items: []
+  - m_Id: 23623513909309440
+    m_Localized: One step
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
