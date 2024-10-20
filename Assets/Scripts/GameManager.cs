@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
 	[SerializeField]
 	private Material clearShader;
 
+	[SerializeField]
+	private Material gameOfLifeShader;
+
 	public int MaxColumnsNumber => 1760;
 
 	private int columnsNumber = 496;
@@ -86,8 +89,7 @@ public class GameManager : MonoBehaviour
 		if (framesLeftUntilApplyGameLogic <= 0)
 		{
 			framesLeftUntilApplyGameLogic = speedValue;
-			//TODO: apply the game mechanic
-			Debug.Log("Game tick !!!");
+			ApplyGameMechanic();
 		}
 		else
 		{
@@ -129,6 +131,13 @@ public class GameManager : MonoBehaviour
 		gameImage.color = Color.white;
 		clearShader.SetColor("_Color", deadColor);
 		ApplyMaterialToGameImage(clearShader);
+	}
+
+	private void ApplyGameMechanic()
+	{
+		gameOfLifeShader.SetColor("_DeadColor", deadColor);
+		gameOfLifeShader.SetColor("_AliveColor", aliveColor);
+		ApplyMaterialToGameImage(gameOfLifeShader);
 	}
 
 	private void ApplyMaterialToGameImage(Material material)
