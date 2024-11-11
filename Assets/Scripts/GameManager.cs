@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
 	public int MaxColumnsNumber => 1760;
 
 	private int columnsNumber = 496;
+
 	public int ColumnsNumber
 	{
 		get => columnsNumber;
@@ -54,6 +55,7 @@ public class GameManager : MonoBehaviour
 	public int MaxSpeedValue => 1200;
 
 	private int speedValue = 2;
+
 	public int SpeedValue
 	{
 		get => speedValue;
@@ -72,14 +74,14 @@ public class GameManager : MonoBehaviour
 	}
 
 	// Start is called before the first frame update
-	void Start()
+	private void Start()
 	{
 		framesLeftUntilApplyGameLogic = speedValue;
 		SetColumnsNumber(columnsNumber);
 	}
 
 	// Update is called once per frame
-	void Update()
+	private void Update()
 	{
 		if (!playToggle.isOn)
 		{
@@ -116,7 +118,6 @@ public class GameManager : MonoBehaviour
 	public void Random()
 	{
 		Clear();
-
 
 		System.Random random = new();
 

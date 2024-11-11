@@ -27,20 +27,16 @@ MonoBehaviour:
     m_Key: Clear
     m_Metadata:
       m_Items: []
-  - m_Id: 4713217601536
-    m_Key: Play
-    m_Metadata:
-      m_Items: []
   - m_Id: 4985344045056
     m_Key: SpeedStart
     m_Metadata:
       m_Items: []
   - m_Id: 5180618256384
-    m_Key: SpeedStop
+    m_Key: SpeedEnd
     m_Metadata:
       m_Items: []
-  - m_Id: 23623513909309440
-    m_Key: OneStep
+  - m_Id: 27802238024495104
+    m_Key: Settings
     m_Metadata:
       m_Items: []
   m_Metadata:

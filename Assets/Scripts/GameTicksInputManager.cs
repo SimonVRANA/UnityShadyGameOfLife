@@ -3,32 +3,33 @@
 
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class GameTicksInputManager : MonoBehaviour
 {
-	[SerializeField]
-	private TMP_InputField inputfield;
+	[Inject]
+	private readonly IGameService gameService;
 
 	[SerializeField]
-	private GameManager gamemanager;
+	private TMP_InputField inputfield;
 
 	public void OnInputFieldValueChanged()
 	{
 		if (string.IsNullOrEmpty(inputfield.text))
 		{
-			inputfield.text = gamemanager.SpeedValue.ToString();
+			inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
 			return;
 		}
 
 		try
 		{
 			int newInt = int.Parse(inputfield.text);
-			gamemanager.SpeedValue = newInt;
+			gameService.NumberOfFramesBetweenUpdates = newInt;
 		}
 		catch { }
 		finally
 		{
-			inputfield.text = gamemanager.SpeedValue.ToString();
+			inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
 		}
 	}
 }
