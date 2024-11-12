@@ -6,14 +6,14 @@ using UnityEngine;
 
 public interface IImageService
 {
-	public const int minimumNumberOfColumns = 5;
+	public const int minimumNumberOfColumns = 6;
 	public const int maximumNumberOfColumns = 1800;
-	public const int columnsIncrementNumber = 5;
+	public const int columnsIncrementNumber = 6;
 
 	/// <summary>
 	/// Multiply the number of colums by this to get the corresponding number of rows.
 	/// </summary>
-	public const float columnsToRowsRatio = 3.0f / 5.0f;
+	public const float columnsToRowsRatio = 1.0f / 2.0f;
 
 	public int NumberOfColumns { get; set; }
 
