@@ -5,30 +5,46 @@ using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 public class ColumnsInputManager : MonoBehaviour
 {
+	[Inject]
+	private readonly IImageService imageService;
+
 	[SerializeField]
 	private TMP_InputField inputfield;
 
 	[SerializeField]
 	private Slider slider;
 
-	[SerializeField]
-	private GameManager gamemanager;
+	private void OnEnable()
+	{
+		slider.maxValue = IImageService.maximumNumberOfColumns / IImageService.columnsIncrementNumber;
+
+		UpdateText();
+		UpdateSlider();
+
+		imageService.OnNumberOfColumnsChanged += OnColumnsNumberChanged;
+	}
+
+	private void OnDisable()
+	{
+		imageService.OnNumberOfColumnsChanged -= OnColumnsNumberChanged;
+	}
 
 	public void OnInputFieldValueChanged()
 	{
 		if (string.IsNullOrEmpty(inputfield.text))
 		{
-			inputfield.text = gamemanager.ColumnsNumber.ToString();
+			inputfield.text = imageService.NumberOfColumns.ToString();
 			return;
 		}
 
 		try
 		{
 			int newInt = int.Parse(inputfield.text);
-			gamemanager.ColumnsNumber = newInt;
+			imageService.NumberOfColumns = newInt;
 		}
 		catch { }
 		finally
@@ -42,7 +58,7 @@ public class ColumnsInputManager : MonoBehaviour
 	{
 		try
 		{
-			gamemanager.ColumnsNumber = (int)slider.value * 16;
+			imageService.NumberOfColumns = (int)slider.value * IImageService.columnsIncrementNumber;
 		}
 		catch { }
 		finally
@@ -60,26 +76,11 @@ public class ColumnsInputManager : MonoBehaviour
 
 	private void UpdateText()
 	{
-		inputfield.text = gamemanager.ColumnsNumber.ToString();
+		inputfield.text = imageService.NumberOfColumns.ToString();
 	}
 
 	private void UpdateSlider()
 	{
-		slider.value = gamemanager.ColumnsNumber / 16;
-	}
-
-	private void OnEnable()
-	{
-		slider.maxValue = gamemanager.MaxColumnsNumber / 16;
-
-		UpdateText();
-		UpdateSlider();
-
-		gamemanager.OnColumnsNumberChanged += OnColumnsNumberChanged;
-	}
-
-	private void OnDisable()
-	{
-		gamemanager.OnColumnsNumberChanged -= OnColumnsNumberChanged;
+		slider.value = imageService.NumberOfColumns / IImageService.columnsIncrementNumber;
 	}
 }

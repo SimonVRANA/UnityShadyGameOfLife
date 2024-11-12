@@ -30,10 +30,6 @@ MonoBehaviour:
     m_Localized: Effacer
     m_Metadata:
       m_Items: []
-  - m_Id: 4713217601536
-    m_Localized: Play
-    m_Metadata:
-      m_Items: []
   - m_Id: 4985344045056
     m_Localized: 'Vitesse : Une fois toutes les '
     m_Metadata:
@@ -42,8 +38,8 @@ MonoBehaviour:
     m_Localized: ' game ticks.'
     m_Metadata:
       m_Items: []
-  - m_Id: 23623513909309440
-    m_Localized: Un cycle
+  - m_Id: 27802238024495104
+    m_Localized: "Param\xE8tres"
     m_Metadata:
       m_Items: []
   references:
