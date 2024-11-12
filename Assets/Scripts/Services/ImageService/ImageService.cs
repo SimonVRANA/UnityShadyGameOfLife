@@ -45,6 +45,8 @@ public class ImageService : IImageService
 	public ImageService(Image image)
 	{
 		gameImage = image;
+
+		gameImage.color = Color.white;
 	}
 
 	public void ApplyShader(Material material)
