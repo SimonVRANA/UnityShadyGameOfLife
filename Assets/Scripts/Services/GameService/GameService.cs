@@ -120,4 +120,11 @@ public class GameService : MonoBehaviour, IGameService
 		gameOfLifeShader.SetColor("_AliveColor", aliveColor);
 		imageService.ApplyShader(gameOfLifeShader);
 	}
+
+	public void SwitchPixel(Vector2 pixelPosition)
+	{
+		Color pixelColor = imageService.GetPixelColor(pixelPosition);
+
+		imageService.SetPixelColor(pixelPosition, pixelColor == deadColor ? aliveColor : deadColor);
+	}
 }
