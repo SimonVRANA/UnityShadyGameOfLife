@@ -22,4 +22,10 @@ public interface IImageService
 	public void ApplyShader(Material material);
 
 	public void RandomizePixels(Color deadColor, Color aliveColor);
+
+	public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition);
+
+	public Color GetPixelColor(Vector2 pixelPosition);
+
+	public void SetPixelColor(Vector2 pixelPosition, Color color);
 }

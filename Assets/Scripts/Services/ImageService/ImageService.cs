@@ -72,4 +72,23 @@ public class ImageService : IImageService
 		}
 		gameImage.sprite.texture.Apply();
 	}
+
+	public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition)
+	{
+		int x = (int)Math.Floor(imagePosition.x * NumberOfColumns);
+		int numberOfRows = (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio);
+		float y = (int)Math.Floor(imagePosition.y * numberOfRows);
+		return new Vector2(x, y);
+	}
+
+	public Color GetPixelColor(Vector2 pixelPosition)
+	{
+		return gameImage.sprite.texture.GetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y));
+	}
+
+	public void SetPixelColor(Vector2 pixelPosition, Color color)
+	{
+		gameImage.sprite.texture.SetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y), color);
+		gameImage.sprite.texture.Apply();
+	}
 }

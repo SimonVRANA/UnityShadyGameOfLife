@@ -2,6 +2,7 @@
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
 using System;
+using UnityEngine;
 
 public interface IGameService
 {
@@ -31,4 +32,6 @@ public interface IGameService
 	public void Pause();
 
 	public void GoOneStep();
+
+	public void SwitchPixel(Vector2 pixelPosition);
 }
