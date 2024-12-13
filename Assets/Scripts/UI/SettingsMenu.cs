@@ -24,6 +24,9 @@ public class SettingsMenu : MonoBehaviour
 	[SerializeField]
 	private ButtonBase oneStepButton;
 
+	[SerializeField]
+	private Helyn.DesignSystem.Dropdown gameTypeDropDown;
+
 	[Header("Sub-menus")]
 	[SerializeField]
 	private GameObject settings;
@@ -38,12 +41,14 @@ public class SettingsMenu : MonoBehaviour
 	{
 		LocalizationSettings.SelectedLocaleChanged += OnLocalChanged;
 		gameService.OnPlayingChanged += UpdateButtonsStates;
+		gameService.OnGameModeChanged += OnGameModeChaned;
 	}
 
 	private void OnDisable()
 	{
 		LocalizationSettings.SelectedLocaleChanged -= OnLocalChanged;
 		gameService.OnPlayingChanged -= UpdateButtonsStates;
+		gameService.OnGameModeChanged -= OnGameModeChaned;
 	}
 
 	public void OpenCloseSettings()
@@ -109,5 +114,16 @@ public class SettingsMenu : MonoBehaviour
 	{
 		playButton.IsToggled = gameService.IsPlaying;
 		oneStepButton.interactable = !gameService.IsPlaying;
+		gameTypeDropDown.interactable = !gameService.IsPlaying;
+	}
+
+	public void OnGameModeDropdownChanged()
+	{
+		gameService.ChangeGameMode((IGameService.GameModes)gameTypeDropDown.value);
+	}
+
+	public void OnGameModeChaned(object sender, EventArgs args)
+	{
+		gameTypeDropDown.value = (int)gameService.GameMode;
 	}
 }

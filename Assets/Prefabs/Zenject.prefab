@@ -125,7 +125,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 116a88ccf3bafd3479f8f38bf4685b85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadColor: {r: 0.27058825, g: 0.27058825, b: 0.27058825, a: 1}
-  aliveColor: {r: 1, g: 0.92156863, b: 0.23137255, a: 1}
-  clearShader: {fileID: 2100000, guid: 2062de1d9137e754d874f6a6ce0b1b6b, type: 2}
-  gameOfLifeShader: {fileID: 2100000, guid: 2af97a930616aa54f82fb00059cbbd20, type: 2}
+  gameModes:
+  - category: 0
+    parameters: {fileID: 11400000, guid: 7ac65c2fcde0a4e428c06dd202fbaa7d, type: 2}
+  - category: 1
+    parameters: {fileID: 11400000, guid: f0cb0f5ef70e0c74a9729012b56defee, type: 2}

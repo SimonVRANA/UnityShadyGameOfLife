@@ -19,8 +19,6 @@ public interface IGameService
 
 	public event EventHandler OnPlayingChanged;
 
-	public GameModes GameMode { get; }
-
 	public event EventHandler OnGameModeChanged;
 
 	public void ApplyRandomPixels();
@@ -34,4 +32,8 @@ public interface IGameService
 	public void GoOneStep();
 
 	public void SwitchPixel(Vector2 pixelPosition);
+
+	public GameModes GameMode { get; }
+
+	public void ChangeGameMode(GameModes newGameMode);
 }
