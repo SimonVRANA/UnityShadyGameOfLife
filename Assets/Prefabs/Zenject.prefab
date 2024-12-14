@@ -126,7 +126,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModes:
-  - category: 0
+  - name: Game of Life
     parameters: {fileID: 11400000, guid: 7ac65c2fcde0a4e428c06dd202fbaa7d, type: 2}
-  - category: 1
+  - name: Reaction Diffusion
     parameters: {fileID: 11400000, guid: f0cb0f5ef70e0c74a9729012b56defee, type: 2}
+  - name: Blink
+    parameters: {fileID: 11400000, guid: 480c3e1d950ccb24c98ad58547b2bbf9, type: 2}

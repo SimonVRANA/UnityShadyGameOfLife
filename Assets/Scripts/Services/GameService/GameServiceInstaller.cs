@@ -12,12 +12,12 @@ public class GameServiceInstaller : MonoInstaller
 	public class GameModeDictionaryElement
 	{
 		[SerializeField]
-		private IGameService.GameModes category;
+		private string name;
 
-		public IGameService.GameModes Category
+		public string Name
 		{
-			get => category;
-			set => category = value;
+			get => name;
+			set => name = value;
 		}
 
 		[SerializeField]
@@ -39,14 +39,14 @@ public class GameServiceInstaller : MonoInstaller
 	{
 		if (service == null)
 		{
-			Dictionary<IGameService.GameModes, DeadAliveGameMode> gameModesAsDictionary = new();
+			Dictionary<string, DeadAliveGameMode> gameModesAsDictionary = new();
 
 			foreach (GameModeDictionaryElement gameModeDictionaryElement in gameModes)
 			{
-				if (!gameModesAsDictionary.ContainsKey(gameModeDictionaryElement.Category))
+				if (!gameModesAsDictionary.ContainsKey(gameModeDictionaryElement.Name))
 				{
 					DeadAliveGameMode gameMode = new(gameModeDictionaryElement.Parameters);
-					gameModesAsDictionary.Add(gameModeDictionaryElement.Category, gameMode);
+					gameModesAsDictionary.Add(gameModeDictionaryElement.Name, gameMode);
 				}
 			}
 
