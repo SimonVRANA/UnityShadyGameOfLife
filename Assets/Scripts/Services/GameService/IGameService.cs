@@ -6,12 +6,6 @@ using UnityEngine;
 
 public interface IGameService
 {
-	public enum GameModes
-	{
-		GameOfLife,
-		ReactionDiffusion
-	}
-
 	public const int maxNumberOfFramesBetweenUpdates = 1200;
 	public int NumberOfFramesBetweenUpdates { get; set; }
 
@@ -33,7 +27,9 @@ public interface IGameService
 
 	public void SwitchPixel(Vector2 pixelPosition);
 
-	public GameModes GameMode { get; }
+	public string GameMode { get; }
 
-	public void ChangeGameMode(GameModes newGameMode);
+	public string[] GetGameModes();
+
+	public void ChangeGameMode(string newGameMode);
 }

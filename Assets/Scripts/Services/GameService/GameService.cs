@@ -3,16 +3,16 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
-using static IGameService;
 
 public class GameService : MonoBehaviour, IGameService
 {
 	[Inject]
 	private readonly IImageService imageService;
 
-	private Dictionary<GameModes, DeadAliveGameMode> gameModes;
+	private Dictionary<string, DeadAliveGameMode> gameModes;
 
 	private int numberOfFramesBetweenUpdates = 2;
 
@@ -38,7 +38,7 @@ public class GameService : MonoBehaviour, IGameService
 		}
 	}
 
-	public GameModes GameMode { get; private set; } = GameModes.GameOfLife;
+	public string GameMode { get; private set; } = "Game of Life";
 
 	public event EventHandler OnPlayingChanged;
 
@@ -46,9 +46,19 @@ public class GameService : MonoBehaviour, IGameService
 
 	private int framesLeftUntilApplyGameLogic;
 
-	public void Initialize(Dictionary<GameModes, DeadAliveGameMode> gameModes)
+	public void Initialize(Dictionary<string, DeadAliveGameMode> gameModes)
 	{
 		this.gameModes = gameModes;
+
+		if (gameModes.Count <= 0)
+		{
+			Debug.LogError("No Game modes provided !");
+		}
+
+		if (!gameModes.ContainsKey(GameMode))
+		{
+			GameMode = gameModes.Keys.First();
+		}
 	}
 
 	private void Awake()
@@ -121,9 +131,15 @@ public class GameService : MonoBehaviour, IGameService
 		imageService.SetPixelColor(pixelPosition, newColor);
 	}
 
-	public void ChangeGameMode(GameModes newGameMode)
+	public string[] GetGameModes()
 	{
-		if (newGameMode != GameMode)
+		return gameModes.Keys.ToArray();
+	}
+
+	public void ChangeGameMode(string newGameMode)
+	{
+		if (newGameMode != GameMode
+			&& gameModes.ContainsKey(newGameMode))
 		{
 			GameMode = newGameMode;
 			OnGameModeChanged?.Invoke(this, EventArgs.Empty);

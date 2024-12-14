@@ -3,7 +3,9 @@
 
 using Helyn.DesignSystem;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 using UnityEngine.UI;
@@ -35,6 +37,12 @@ public class SettingsMenu : MonoBehaviour
 	{
 		toggleButton.IsToggled = false;
 		settings.SetActive(false);
+
+		gameTypeDropDown.options.Clear();
+		foreach (string gameModes in gameService.GetGameModes())
+		{
+			gameTypeDropDown.options.Add(new TMP_Dropdown.OptionData(gameModes));
+		}
 	}
 
 	private void OnEnable()
@@ -119,11 +127,12 @@ public class SettingsMenu : MonoBehaviour
 
 	public void OnGameModeDropdownChanged()
 	{
-		gameService.ChangeGameMode((IGameService.GameModes)gameTypeDropDown.value);
+		gameService.ChangeGameMode(gameTypeDropDown.options.ElementAt(gameTypeDropDown.value).text);
 	}
 
 	public void OnGameModeChaned(object sender, EventArgs args)
 	{
-		gameTypeDropDown.value = (int)gameService.GameMode;
+		TMP_Dropdown.OptionData selectedOption = gameTypeDropDown.options.Where(option => option.text == gameService.GameMode).First();
+		gameTypeDropDown.value = gameTypeDropDown.options.IndexOf(selectedOption);
 	}
 }
