@@ -17,6 +17,12 @@ public class DeadAliveGameModeParameters : ScriptableObject
 
 	public Color AliveColor => aliveColor;
 
+	[Header("Ratios")]
+	[SerializeField, Range(0.0f, 1.0f), Tooltip("The ratio of alive cells when randomizing the world")]
+	private float aliveRatio = 0.5f;
+
+	public float AliveRatio => aliveRatio;
+
 	[Header("Shaders")]
 	[SerializeField]
 	private Material clearShader;

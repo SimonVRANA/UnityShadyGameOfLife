@@ -99,7 +99,7 @@ public class GameService : MonoBehaviour, IGameService
 	{
 		ClearPixels();
 
-		imageService.RandomizePixels(GetCurrentGameMode().DeadColor, GetCurrentGameMode().AliveColor);
+		imageService.RandomizePixels(GetCurrentGameMode().DeadColor, GetCurrentGameMode().AliveColor, GetCurrentGameMode().AliveRatio);
 	}
 
 	public void ClearPixels()

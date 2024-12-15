@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 372fc3f1e3a88644fb008825ce5c7ae6, type: 3}
-  m_Name: ReactionDiffusionParameters
+  m_Name: ForestFireParameters
   m_EditorClassIdentifier: 
-  deadColor: {r: 0, g: 0, b: 1, a: 1}
-  aliveColor: {r: 0, g: 1, b: 0, a: 1}
-  aliveRatio: 0.95
+  deadColor: {r: 0, g: 0, b: 0, a: 1}
+  aliveColor: {r: 0.39215687, g: 0.8666667, b: 0.09019608, a: 1}
+  aliveRatio: 0.5
   clearShader: {fileID: 2100000, guid: 2062de1d9137e754d874f6a6ce0b1b6b, type: 2}
-  gameShader: {fileID: 2100000, guid: a1416d7926a2e1c41b1989c83f7e14b5, type: 2}
+  gameShader: {fileID: 2100000, guid: a58101a488de6fc419e418c997525be3, type: 2}

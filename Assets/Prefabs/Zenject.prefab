@@ -126,9 +126,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameModes:
-  - name: Game of Life
-    parameters: {fileID: 11400000, guid: 7ac65c2fcde0a4e428c06dd202fbaa7d, type: 2}
-  - name: Reaction Diffusion
-    parameters: {fileID: 11400000, guid: f0cb0f5ef70e0c74a9729012b56defee, type: 2}
   - name: Blink
     parameters: {fileID: 11400000, guid: 480c3e1d950ccb24c98ad58547b2bbf9, type: 2}
+  - name: Game of Life
+    parameters: {fileID: 11400000, guid: 7ac65c2fcde0a4e428c06dd202fbaa7d, type: 2}
+  - name: Forest Fire
+    parameters: {fileID: 11400000, guid: f0cb0f5ef70e0c74a9729012b56defee, type: 2}
+  - name: Reaction Diffusion
+    parameters: {fileID: 11400000, guid: 979f6ee48bcbc7648b2382075ca168e9, type: 2}
+  - name: Better Forest Fire (imune)
+    parameters: {fileID: 11400000, guid: 6edba147e27b71343a44ace980c7e146, type: 2}
+  - name: Better Forest Fire
+    parameters: {fileID: 11400000, guid: 393e7697e211994478fd6de764e072ff, type: 2}
