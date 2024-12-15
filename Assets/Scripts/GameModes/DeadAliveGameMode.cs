@@ -17,6 +17,8 @@ public class DeadAliveGameMode
 
 	public Color DeadColor => parameters.DeadColor;
 
+	public float AliveRatio => parameters.AliveRatio;
+
 	public Material GetClearShader()
 	{
 		parameters.ClearShader.SetColor("_Color", DeadColor);

@@ -59,7 +59,7 @@ public class ImageService : IImageService
 		RenderTexture.ReleaseTemporary(tmpTexture);
 	}
 
-	public void RandomizePixels(Color deadColor, Color aliveColor)
+	public void RandomizePixels(Color deadColor, Color aliveColor, float aliveRatio)
 	{
 		System.Random random = new();
 
@@ -67,7 +67,7 @@ public class ImageService : IImageService
 		{
 			for (int heightIndex = 0; heightIndex < gameImage.sprite.texture.height; heightIndex++)
 			{
-				gameImage.sprite.texture.SetPixel(widthIndex, heightIndex, random.NextDouble() < 0.5 ? deadColor : aliveColor);
+				gameImage.sprite.texture.SetPixel(widthIndex, heightIndex, random.NextDouble() < aliveRatio ? aliveColor : deadColor);
 			}
 		}
 		gameImage.sprite.texture.Apply();
