@@ -7,14 +7,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Zenject;
 
 namespace SGOL.Services.Game
 {
 	public class GameService : MonoBehaviour, IGameService
 	{
-		[Inject]
-		private readonly IImageService imageService;
+		private IImageService imageService;
 
 		private Dictionary<string, DeadAliveGameMode> gameModes;
 
@@ -50,7 +48,7 @@ namespace SGOL.Services.Game
 
 		private int framesLeftUntilApplyGameLogic;
 
-		public void Initialize(Dictionary<string, DeadAliveGameMode> gameModes)
+		public void Initialize(Dictionary<string, DeadAliveGameMode> gameModes, IImageService imageService)
 		{
 			this.gameModes = gameModes;
 
@@ -64,6 +62,7 @@ namespace SGOL.Services.Game
 				GameMode = gameModes.Keys.First();
 			}
 
+			this.imageService = imageService;
 			imageService.NumberOfColumnsChanged += ImageService_OnNumberOfColumnsChanged;
 		}
 
