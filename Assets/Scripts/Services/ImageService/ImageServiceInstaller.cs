@@ -2,19 +2,21 @@
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-public class ImageServiceInstaller : MonoInstaller
+namespace SGOL.Services.Image
 {
-	[Header("Links")]
-	[SerializeField]
-	private Image gameImage;
-
-	public override void InstallBindings()
+	public class ImageServiceInstaller : MonoInstaller
 	{
-		Container.BindInterfacesTo<ImageService>()
-				 .AsSingle()
-				 .WithArguments(gameImage);
+		[Header("Links")]
+		[SerializeField]
+		private UnityEngine.UI.Image gameImage;
+
+		public override void InstallBindings()
+		{
+			Container.BindInterfacesTo<ImageService>()
+					 .AsSingle()
+					 .WithArguments(gameImage);
+		}
 	}
 }

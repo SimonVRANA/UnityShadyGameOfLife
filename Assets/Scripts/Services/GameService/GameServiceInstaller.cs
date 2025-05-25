@@ -1,62 +1,66 @@
 // This code has been made by Simon VRANA.
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
+using SGOL.GameModes;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class GameServiceInstaller : MonoInstaller
+namespace SGOL.Services.Game
 {
-	[Serializable]
-	public class GameModeDictionaryElement
+	public class GameServiceInstaller : MonoInstaller
 	{
-		[SerializeField]
-		private string name;
-
-		public string Name
+		[Serializable]
+		public class GameModeDictionaryElement
 		{
-			get => name;
-			set => name = value;
-		}
+			[SerializeField]
+			private string name;
 
-		[SerializeField]
-		private DeadAliveGameModeParameters parameters;
-
-		public DeadAliveGameModeParameters Parameters
-		{
-			get => parameters;
-			set => parameters = value;
-		}
-	}
-
-	[SerializeField]
-	private List<GameModeDictionaryElement> gameModes;
-
-	private GameService service = null;
-
-	public override void InstallBindings()
-	{
-		if (service == null)
-		{
-			Dictionary<string, DeadAliveGameMode> gameModesAsDictionary = new();
-
-			foreach (GameModeDictionaryElement gameModeDictionaryElement in gameModes)
+			public string Name
 			{
-				if (!gameModesAsDictionary.ContainsKey(gameModeDictionaryElement.Name))
-				{
-					DeadAliveGameMode gameMode = new(gameModeDictionaryElement.Parameters);
-					gameModesAsDictionary.Add(gameModeDictionaryElement.Name, gameMode);
-				}
+				get => name;
+				set => name = value;
 			}
 
-			GameObject serviceGameObject = new("GameService");
+			[SerializeField]
+			private DeadAliveGameModeParameters parameters;
 
-			service = serviceGameObject.AddComponent<GameService>();
-			service.Initialize(gameModesAsDictionary);
+			public DeadAliveGameModeParameters Parameters
+			{
+				get => parameters;
+				set => parameters = value;
+			}
 		}
 
-		Container.BindInterfacesTo<GameService>().FromInstance(service);
-		Container.QueueForInject(service);
+		[SerializeField]
+		private List<GameModeDictionaryElement> gameModes;
+
+		private GameService service = null;
+
+		public override void InstallBindings()
+		{
+			if (service == null)
+			{
+				Dictionary<string, DeadAliveGameMode> gameModesAsDictionary = new();
+
+				foreach (GameModeDictionaryElement gameModeDictionaryElement in gameModes)
+				{
+					if (!gameModesAsDictionary.ContainsKey(gameModeDictionaryElement.Name))
+					{
+						DeadAliveGameMode gameMode = new(gameModeDictionaryElement.Parameters);
+						gameModesAsDictionary.Add(gameModeDictionaryElement.Name, gameMode);
+					}
+				}
+
+				GameObject serviceGameObject = new("GameService");
+
+				service = serviceGameObject.AddComponent<GameService>();
+				service.Initialize(gameModesAsDictionary);
+			}
+
+			Container.BindInterfacesTo<GameService>().FromInstance(service);
+			Container.QueueForInject(service);
+		}
 	}
 }

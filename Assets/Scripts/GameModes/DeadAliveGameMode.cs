@@ -3,32 +3,35 @@
 
 using UnityEngine;
 
-public class DeadAliveGameMode
+namespace SGOL.GameModes
 {
-	[SerializeField]
-	private DeadAliveGameModeParameters parameters;
-
-	public DeadAliveGameMode(DeadAliveGameModeParameters parameters)
+	public class DeadAliveGameMode
 	{
-		this.parameters = parameters;
-	}
+		[SerializeField]
+		private DeadAliveGameModeParameters parameters;
 
-	public Color AliveColor => parameters.AliveColor;
+		public DeadAliveGameMode(DeadAliveGameModeParameters parameters)
+		{
+			this.parameters = parameters;
+		}
 
-	public Color DeadColor => parameters.DeadColor;
+		public Color AliveColor => parameters.AliveColor;
 
-	public float AliveRatio => parameters.AliveRatio;
+		public Color DeadColor => parameters.DeadColor;
 
-	public Material GetClearShader()
-	{
-		parameters.ClearShader.SetColor("_Color", DeadColor);
-		return parameters.ClearShader;
-	}
+		public float AliveRatio => parameters.AliveRatio;
 
-	public Material GetGameShader()
-	{
-		parameters.GameShader.SetColor("_DeadColor", DeadColor);
-		parameters.GameShader.SetColor("_AliveColor", AliveColor);
-		return parameters.GameShader;
+		public Material GetClearShader()
+		{
+			parameters.ClearShader.SetColor("_Color", DeadColor);
+			return parameters.ClearShader;
+		}
+
+		public Material GetGameShader()
+		{
+			parameters.GameShader.SetColor("_DeadColor", DeadColor);
+			parameters.GameShader.SetColor("_AliveColor", AliveColor);
+			return parameters.GameShader;
+		}
 	}
 }
