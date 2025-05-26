@@ -39,11 +39,30 @@ public class TestImageService
 	public IEnumerator TestNumberOfColumns()
 	{
 		imageService.NumberOfColumns = 12;
-		Assert.AreEqual(imageComponent.sprite.rect.width, 12);
-		Assert.AreEqual(imageComponent.sprite.rect.height, (int)Math.Floor(12 * IImageService.columnsToRowsRatio));
+		Assert.AreEqual(imageComponent.sprite.rect.width, 12, "Value between IImageService.minimumNumberOfColumns and IImageService.maximumNumberOfColumns should be accepted.");
+		Assert.AreEqual(imageComponent.sprite.rect.height, (int)Math.Floor(12 * IImageService.columnsToRowsRatio), "Height should be set to width*IImageService.columnsToRowsRatio.");
 
-		// Use the Assert class to test conditions.
-		// Use yield to skip a frame.
+		imageService.NumberOfColumns = -10;
+		Assert.AreEqual(imageComponent.sprite.rect.width, IImageService.minimumNumberOfColumns, "Values lower that IImageService.minimumNumberOfColumns are not allowed.");
+
+		imageService.NumberOfColumns = int.MaxValue;
+		Assert.AreEqual(imageComponent.sprite.rect.width, IImageService.maximumNumberOfColumns, "Values higher that IImageService.maximumNumberOfColumns are not allowed.");
+
+		if (IImageService.columnsIncrementNumber > 1)
+		{
+			imageService.NumberOfColumns = IImageService.minimumNumberOfColumns;
+			imageService.NumberOfColumns += IImageService.columnsIncrementNumber / 2;
+
+			Assert.AreEqual(imageComponent.sprite.rect.width % IImageService.columnsIncrementNumber, 0, "Number of columns should be a multiple of IImageService.columnsIncrementNumber.");
+		}
+
+		bool eventFired = false;
+		imageService.NumberOfColumnsChanged += (sender, args) => eventFired = true;
+		imageService.NumberOfColumns = IImageService.minimumNumberOfColumns;
+		imageService.NumberOfColumns = IImageService.minimumNumberOfColumns + IImageService.columnsIncrementNumber;
+		yield return null;
+		Assert.IsTrue(eventFired, "Event should fire after number is changed");
+
 		yield return null;
 	}
 }
