@@ -24,7 +24,7 @@ public class TestImageService
 		UnityEditor.SceneManagement.EditorSceneManager.LoadSceneInPlayMode("Assets/Tests/Scenes/TestScene.unity", new LoadSceneParameters(LoadSceneMode.Additive));
 		yield return null;
 
-		GameObject zenjectContextGameObject = GameObject.Find("Zenject");
+		GameObject zenjectContextGameObject = GameObject.Find("ZenjectTest");
 		SceneContext sceneContext = zenjectContextGameObject.GetComponent<SceneContext>();
 		DiContainer container = sceneContext.Container;
 		Assert.IsNotNull(container);

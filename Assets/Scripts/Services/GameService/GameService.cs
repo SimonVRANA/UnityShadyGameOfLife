@@ -139,6 +139,12 @@ namespace SGOL.Services.Game
 
 		public void SwitchPixel(Vector2 pixelPosition)
 		{
+			if (pixelPosition.x < 0 || pixelPosition.y < 0
+				|| pixelPosition.x >= imageService.NumberOfColumns || pixelPosition.y >= (int)MathF.Floor(imageService.NumberOfColumns * IImageService.columnsToRowsRatio))
+			{
+				throw new ArgumentOutOfRangeException(nameof(pixelPosition), "Pixel position must be within the bounds of the image.");
+			}
+
 			Color pixelColor = imageService.GetPixelColor(pixelPosition);
 
 			Color newColor = pixelColor == GetCurrentGameMode().DeadColor ? GetCurrentGameMode().AliveColor
@@ -153,12 +159,18 @@ namespace SGOL.Services.Game
 
 		public void ChangeGameMode(string newGameMode)
 		{
-			if (newGameMode != GameMode
-				&& gameModes.ContainsKey(newGameMode))
+			if (newGameMode != GameMode)
 			{
-				GameMode = newGameMode;
-				OnGameModeChanged?.Invoke(this, EventArgs.Empty);
-				ClearPixels();
+				if (gameModes.ContainsKey(newGameMode))
+				{
+					GameMode = newGameMode;
+					OnGameModeChanged?.Invoke(this, EventArgs.Empty);
+					ClearPixels();
+				}
+				else
+				{
+					throw new ArgumentException($"Game mode '{newGameMode}' does not exist in the available game modes.");
+				}
 			}
 		}
 
