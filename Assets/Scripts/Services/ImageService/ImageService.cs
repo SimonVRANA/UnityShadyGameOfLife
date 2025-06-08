@@ -100,9 +100,11 @@ namespace SGOL.Services.Image
 				throw new ArgumentOutOfRangeException(nameof(imagePosition), "Image position must be between 0 and 1 for both x and y.");
 			}
 
-			int x = (int)Math.Floor(imagePosition.x * (NumberOfColumns - 1));
+			int x = (int)Math.Floor(imagePosition.x * NumberOfColumns);
+			x = Mathf.Clamp(x, 0, NumberOfColumns - 1);
 			int numberOfRows = (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio);
-			float y = (int)Math.Floor(imagePosition.y * (numberOfRows - 1));
+			float y = (int)Math.Floor(imagePosition.y * (numberOfRows));
+			y = Mathf.Clamp(y, 0, numberOfRows - 1);
 			return new Vector2(x, y);
 		}
 

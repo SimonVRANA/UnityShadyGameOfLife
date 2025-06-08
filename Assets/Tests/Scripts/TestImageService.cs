@@ -185,8 +185,8 @@ public class TestImageService
 
 		Vector2 imagePosition = new(0.5f, 0.5f);
 		Vector2 pixelPosition = imageService.ImagePositionToPixelPosition(imagePosition);
-		int expectedX = (int)Math.Floor(imagePosition.x * (imageService.NumberOfColumns - 1));
-		int expectedY = (int)Math.Floor(imagePosition.y * ((int)Math.Floor(imageService.NumberOfColumns * IImageService.columnsToRowsRatio) - 1));
+		int expectedX = (int)Math.Floor(imagePosition.x * (imageService.NumberOfColumns));
+		int expectedY = (int)Math.Floor(imagePosition.y * ((int)Math.Floor(imageService.NumberOfColumns * IImageService.columnsToRowsRatio)));
 		Assert.AreEqual(new Vector2(expectedX, expectedY), pixelPosition, $"Image position (0.5, 0.5) should map to pixel position ({expectedX}, {expectedY}) for 24 columns.");
 
 		imagePosition = new Vector2(0f, 0f);
