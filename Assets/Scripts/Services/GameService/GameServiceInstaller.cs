@@ -2,7 +2,6 @@
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
 using SGOL.GameModes;
-using SGOL.Services.Image;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +56,7 @@ namespace SGOL.Services.Game
 				GameObject serviceGameObject = new("GameService");
 
 				service = serviceGameObject.AddComponent<GameService>();
-				service.Initialize(gameModesAsDictionary, Container.Resolve<IImageService>());
+				service.Initialize(gameModesAsDictionary);
 			}
 
 			Container.BindInterfacesTo<GameService>().FromInstance(service);

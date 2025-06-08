@@ -10,7 +10,7 @@ namespace SGOL.Services.Image
 	{
 		private readonly UnityEngine.UI.Image gameImage;
 
-		private int numberOfColumns = 900;
+		private int numberOfColumns = 0;
 
 		public event EventHandler NumberOfColumnsChanged;
 
@@ -54,6 +54,8 @@ namespace SGOL.Services.Image
 			gameImage = image;
 
 			gameImage.color = Color.white;
+
+			NumberOfColumns = IImageService.minimumNumberOfColumns;
 		}
 
 		public void ApplyShader(Material material)

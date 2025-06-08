@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace SGOL.Services.Game
 {
@@ -48,7 +49,7 @@ namespace SGOL.Services.Game
 
 		private int framesLeftUntilApplyGameLogic;
 
-		public void Initialize(Dictionary<string, DeadAliveGameMode> gameModes, IImageService imageService)
+		public void Initialize(Dictionary<string, DeadAliveGameMode> gameModes)
 		{
 			this.gameModes = gameModes;
 
@@ -61,7 +62,11 @@ namespace SGOL.Services.Game
 			{
 				GameMode = gameModes.Keys.First();
 			}
+		}
 
+		[Inject]
+		private void Inject(IImageService imageService)
+		{
 			this.imageService = imageService;
 			imageService.NumberOfColumnsChanged += ImageService_OnNumberOfColumnsChanged;
 		}
