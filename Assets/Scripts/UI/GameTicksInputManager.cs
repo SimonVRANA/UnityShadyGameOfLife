@@ -1,35 +1,39 @@
 // This code has been made by Simon VRANA.
 // Please ask by email (simon.vrana.pro@gmail.com) before reusing for commercial purpose.
 
+using SGOL.Services.Game;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
-public class GameTicksInputManager : MonoBehaviour
+namespace SGOL.UI
 {
-	[Inject]
-	private readonly IGameService gameService;
-
-	[SerializeField]
-	private TMP_InputField inputfield;
-
-	public void OnInputFieldValueChanged()
+	public class GameTicksInputManager : MonoBehaviour
 	{
-		if (string.IsNullOrEmpty(inputfield.text))
-		{
-			inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
-			return;
-		}
+		[Inject]
+		private readonly IGameService gameService;
 
-		try
+		[SerializeField]
+		private TMP_InputField inputfield;
+
+		public void OnInputFieldValueChanged()
 		{
-			int newInt = int.Parse(inputfield.text);
-			gameService.NumberOfFramesBetweenUpdates = newInt;
-		}
-		catch { }
-		finally
-		{
-			inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
+			if (string.IsNullOrEmpty(inputfield.text))
+			{
+				inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
+				return;
+			}
+
+			try
+			{
+				int newInt = int.Parse(inputfield.text);
+				gameService.NumberOfFramesBetweenUpdates = newInt;
+			}
+			catch { }
+			finally
+			{
+				inputfield.text = gameService.NumberOfFramesBetweenUpdates.ToString();
+			}
 		}
 	}
 }

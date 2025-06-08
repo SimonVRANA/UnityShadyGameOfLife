@@ -5,14 +5,17 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Localization.Settings;
 
-public class LanguagesButtons : MonoBehaviour
+namespace SGOL.UI
 {
-	public void ChangeLanguage(string languageKey)
+	public class LanguagesButtons : MonoBehaviour
 	{
-		UnityEngine.Localization.Locale local = LocalizationSettings.AvailableLocales.Locales.Where(local => local.Identifier == languageKey).FirstOrDefault();
-		if (local != null)
+		public void ChangeLanguage(string languageKey)
 		{
-			LocalizationSettings.SelectedLocale = local;
+			UnityEngine.Localization.Locale local = LocalizationSettings.AvailableLocales.Locales.Where(local => local.Identifier == languageKey).FirstOrDefault();
+			if (local != null)
+			{
+				LocalizationSettings.SelectedLocale = local;
+			}
 		}
 	}
 }

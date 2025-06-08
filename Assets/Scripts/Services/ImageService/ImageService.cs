@@ -3,92 +3,132 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.UI;
-using Zenject;
 
-public class ImageService : IImageService
+namespace SGOL.Services.Image
 {
-	[Inject]
-	private readonly IGameService gameService;
-
-	private readonly Image gameImage;
-
-	private int numberOfColumns = 900;
-
-	public event EventHandler OnNumberOfColumnsChanged;
-
-	public int NumberOfColumns
+	public class ImageService : IImageService
 	{
-		get => numberOfColumns;
-		set
+		private readonly UnityEngine.UI.Image gameImage;
+
+		private int numberOfColumns = 0;
+
+		public event EventHandler NumberOfColumnsChanged;
+
+		public int NumberOfColumns
 		{
-			numberOfColumns = AdjustColumnsNumber(value);
-
-			Texture2D newTexture = new(numberOfColumns, (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio))
+			get => numberOfColumns;
+			set
 			{
-				filterMode = FilterMode.Point
-			};
-			Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
-			gameImage.sprite = newSprite;
-			gameService.ClearPixels();
-			OnNumberOfColumnsChanged?.Invoke(this, EventArgs.Empty);
-		}
-	}
+				int adjustedValue = AdjustColumnsNumber(value);
+				if (adjustedValue == numberOfColumns)
+				{
+					return;
+				}
 
-	private int AdjustColumnsNumber(int newNumber)
-	{
-		int restult = Mathf.Clamp(newNumber, IImageService.minimumNumberOfColumns, IImageService.maximumNumberOfColumns);
-		restult = (restult / IImageService.columnsIncrementNumber) * IImageService.columnsIncrementNumber;
-		return restult;
-	}
+				numberOfColumns = adjustedValue;
 
-	public ImageService(Image image)
-	{
-		gameImage = image;
-
-		gameImage.color = Color.white;
-	}
-
-	public void ApplyShader(Material material)
-	{
-		RenderTexture tmpTexture = RenderTexture.GetTemporary(gameImage.sprite.texture.width, gameImage.sprite.texture.height);
-		Graphics.Blit(gameImage.sprite.texture, tmpTexture, material);
-		RenderTexture.active = tmpTexture;
-		gameImage.sprite.texture.ReadPixels(new Rect(0, 0, tmpTexture.width, tmpTexture.height), 0, 0);
-		gameImage.sprite.texture.Apply();
-		RenderTexture.ReleaseTemporary(tmpTexture);
-	}
-
-	public void RandomizePixels(Color deadColor, Color aliveColor, float aliveRatio)
-	{
-		System.Random random = new();
-
-		for (int widthIndex = 0; widthIndex < gameImage.sprite.texture.width; widthIndex++)
-		{
-			for (int heightIndex = 0; heightIndex < gameImage.sprite.texture.height; heightIndex++)
-			{
-				gameImage.sprite.texture.SetPixel(widthIndex, heightIndex, random.NextDouble() < aliveRatio ? aliveColor : deadColor);
+				Texture2D newTexture = new(numberOfColumns, (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio))
+				{
+					filterMode = FilterMode.Point
+				};
+				Sprite newSprite = Sprite.Create(newTexture, new Rect(0, 0, newTexture.width, newTexture.height), new Vector2(0.5f, 0.5f), 100);
+				gameImage.sprite = newSprite;
+				NumberOfColumnsChanged?.Invoke(this, EventArgs.Empty);
 			}
 		}
-		gameImage.sprite.texture.Apply();
-	}
 
-	public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition)
-	{
-		int x = (int)Math.Floor(imagePosition.x * NumberOfColumns);
-		int numberOfRows = (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio);
-		float y = (int)Math.Floor(imagePosition.y * numberOfRows);
-		return new Vector2(x, y);
-	}
+		private int AdjustColumnsNumber(int newNumber)
+		{
+			int restult = Mathf.Clamp(newNumber, IImageService.minimumNumberOfColumns, IImageService.maximumNumberOfColumns);
+			restult = (restult / IImageService.columnsIncrementNumber) * IImageService.columnsIncrementNumber;
+			return restult;
+		}
 
-	public Color GetPixelColor(Vector2 pixelPosition)
-	{
-		return gameImage.sprite.texture.GetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y));
-	}
+		public ImageService(UnityEngine.UI.Image image)
+		{
+			if (image == null)
+			{
+				throw new ArgumentNullException(nameof(image), "Image cannot be null.");
+			}
 
-	public void SetPixelColor(Vector2 pixelPosition, Color color)
-	{
-		gameImage.sprite.texture.SetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y), color);
-		gameImage.sprite.texture.Apply();
+			gameImage = image;
+
+			gameImage.color = Color.white;
+
+			NumberOfColumns = IImageService.minimumNumberOfColumns;
+		}
+
+		public void ApplyShader(Material material)
+		{
+			if (material == null)
+			{
+				throw new ArgumentNullException(nameof(material), "Material cannot be null.");
+			}
+
+			RenderTexture tmpTexture = RenderTexture.GetTemporary(gameImage.sprite.texture.width, gameImage.sprite.texture.height);
+			Graphics.Blit(gameImage.sprite.texture, tmpTexture, material);
+			RenderTexture.active = tmpTexture;
+			gameImage.sprite.texture.ReadPixels(new Rect(0, 0, tmpTexture.width, tmpTexture.height), 0, 0);
+			gameImage.sprite.texture.Apply();
+			RenderTexture.ReleaseTemporary(tmpTexture);
+		}
+
+		public void RandomizePixels(Color deadColor, Color aliveColor, float aliveRatio)
+		{
+			if (aliveRatio < 0 || aliveRatio > 1)
+			{
+				throw new ArgumentOutOfRangeException(nameof(aliveRatio), "Alive ratio must be between 0 and 1.");
+			}
+
+			System.Random random = new();
+
+			for (int widthIndex = 0; widthIndex < gameImage.sprite.texture.width; widthIndex++)
+			{
+				for (int heightIndex = 0; heightIndex < gameImage.sprite.texture.height; heightIndex++)
+				{
+					gameImage.sprite.texture.SetPixel(widthIndex, heightIndex, random.NextDouble() < aliveRatio ? aliveColor : deadColor);
+				}
+			}
+			gameImage.sprite.texture.Apply();
+		}
+
+		public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition)
+		{
+			if (imagePosition.x < 0 || imagePosition.x > 1
+			   || imagePosition.y < 0 || imagePosition.y > 1)
+			{
+				throw new ArgumentOutOfRangeException(nameof(imagePosition), "Image position must be between 0 and 1 for both x and y.");
+			}
+
+			int x = (int)Math.Floor(imagePosition.x * NumberOfColumns);
+			x = Mathf.Clamp(x, 0, NumberOfColumns - 1);
+			int numberOfRows = (int)Math.Floor(numberOfColumns * IImageService.columnsToRowsRatio);
+			float y = (int)Math.Floor(imagePosition.y * (numberOfRows));
+			y = Mathf.Clamp(y, 0, numberOfRows - 1);
+			return new Vector2(x, y);
+		}
+
+		public Color GetPixelColor(Vector2 pixelPosition)
+		{
+			if (pixelPosition.x < 0 || pixelPosition.x >= gameImage.sprite.texture.width
+			   || pixelPosition.y < 0 || pixelPosition.y >= gameImage.sprite.texture.height)
+			{
+				throw new ArgumentOutOfRangeException(nameof(pixelPosition), "Pixel position must be within the texture bounds.");
+			}
+
+			return gameImage.sprite.texture.GetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y));
+		}
+
+		public void SetPixelColor(Vector2 pixelPosition, Color color)
+		{
+			if (pixelPosition.x < 0 || pixelPosition.x >= gameImage.sprite.texture.width
+			   || pixelPosition.y < 0 || pixelPosition.y >= gameImage.sprite.texture.height)
+			{
+				throw new ArgumentOutOfRangeException(nameof(pixelPosition), "Pixel position must be within the texture bounds.");
+			}
+
+			gameImage.sprite.texture.SetPixel((int)Math.Floor(pixelPosition.x), (int)Math.Floor(pixelPosition.y), color);
+			gameImage.sprite.texture.Apply();
+		}
 	}
 }

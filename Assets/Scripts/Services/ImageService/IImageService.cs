@@ -4,28 +4,31 @@
 using System;
 using UnityEngine;
 
-public interface IImageService
+namespace SGOL.Services.Image
 {
-	public const int minimumNumberOfColumns = 6;
-	public const int maximumNumberOfColumns = 1800;
-	public const int columnsIncrementNumber = 6;
+	public interface IImageService
+	{
+		public const int minimumNumberOfColumns = 6;
+		public const int maximumNumberOfColumns = 1800;
+		public const int columnsIncrementNumber = 6;
 
-	/// <summary>
-	/// Multiply the number of colums by this to get the corresponding number of rows.
-	/// </summary>
-	public const float columnsToRowsRatio = 1.0f / 2.0f;
+		/// <summary>
+		/// Multiply the number of colums by this to get the corresponding number of rows.
+		/// </summary>
+		public const float columnsToRowsRatio = 1.0f / 2.0f;
 
-	public int NumberOfColumns { get; set; }
+		public int NumberOfColumns { get; set; }
 
-	public event EventHandler OnNumberOfColumnsChanged;
+		public event EventHandler NumberOfColumnsChanged;
 
-	public void ApplyShader(Material material);
+		public void ApplyShader(Material material);
 
-	public void RandomizePixels(Color deadColor, Color aliveColor, float aliveRatio);
+		public void RandomizePixels(Color deadColor, Color aliveColor, float aliveRatio);
 
-	public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition);
+		public Vector2 ImagePositionToPixelPosition(Vector2 imagePosition);
 
-	public Color GetPixelColor(Vector2 pixelPosition);
+		public Color GetPixelColor(Vector2 pixelPosition);
 
-	public void SetPixelColor(Vector2 pixelPosition, Color color);
+		public void SetPixelColor(Vector2 pixelPosition, Color color);
+	}
 }

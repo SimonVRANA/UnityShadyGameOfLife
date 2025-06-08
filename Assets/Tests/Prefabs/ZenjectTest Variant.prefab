@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &7799645601396483217
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 81910697220477746, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[2].name
+      value: Better Forest Fire (imune)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[3].name
+      value: Better Forest Fire (imune)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[4].name
+      value: Better Forest Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[0].parameters
+      value: 
+      objectReference: {fileID: 11400000, guid: e8366b8f2f4d6b3478489c2cef28ad6c, type: 2}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[2].parameters
+      value: 
+      objectReference: {fileID: 11400000, guid: 6edba147e27b71343a44ace980c7e146, type: 2}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[3].parameters
+      value: 
+      objectReference: {fileID: 11400000, guid: 6edba147e27b71343a44ace980c7e146, type: 2}
+    - target: {fileID: 1255497344183305970, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: gameModes.Array.data[4].parameters
+      value: 
+      objectReference: {fileID: 11400000, guid: 393e7697e211994478fd6de764e072ff, type: 2}
+    - target: {fileID: 6554301528324800102, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
+      propertyPath: m_Name
+      value: ZenjectTest Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6df2703c6794ac84ba4b79ba813064ca, type: 3}
